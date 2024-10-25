@@ -31,7 +31,7 @@ const ReadMore = () => {
         <Typography variant="h5" gutterBottom>{post.title}</Typography>
         <Typography variant="body1">{post.description}</Typography>
         <Button size="small" component={NavLink} to={"/"}>Delete</Button>
-        <Button size="small" component={NavLink} to={"/"}>Edit</Button>
+        <Button size="small" component={NavLink} to={`/posts/${post.id}/edit`}>Edit</Button>
       </CardContent>
     </Card>
   );

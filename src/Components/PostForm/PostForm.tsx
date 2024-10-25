@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IPostForm } from '../../types';
 import * as React from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import axiosApi from '../../axiosApi.ts';
 import dayjs from 'dayjs';
 
 
@@ -13,8 +12,22 @@ const initialForm = {
   date: '',
 };
 
-const PostForm = () => {
+interface Props {
+  submitForm: (post: IPostForm) => void;
+  postToEdit?: IPostForm;
+}
+
+const PostForm: React.FC<Props> = ({submitForm, postToEdit}) => {
   const [post, setPost] = useState<IPostForm>({...initialForm});
+
+  useEffect(() => {
+    if (postToEdit) {
+      setPost(prevState => ({
+        ...prevState,
+        ...postToEdit,
+      }));
+    }
+  }, [postToEdit]);
 
   const onChangeField = (e:React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -27,8 +40,7 @@ const PostForm = () => {
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await axiosApi.post('posts.json', {...post, date: dayjs().format('YYYY-MM-DD')});
-
+    submitForm({...post, date: dayjs().format('YYYY-MM-DD')});
     setPost({...initialForm});
   };
 

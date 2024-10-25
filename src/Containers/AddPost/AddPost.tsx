@@ -1,9 +1,10 @@
+import PostForm from '../../Components/PostForm/PostForm.tsx';
 
 
 const AddPost = () => {
   return (
     <div>
-      Add new post
+      <PostForm/>
     </div>
   );
 };

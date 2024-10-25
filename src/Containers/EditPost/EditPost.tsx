@@ -10,7 +10,7 @@ const EditPost = () => {
   const params = useParams<{idPost: string}>();
   const navigate = useNavigate();
 
-  const fetchOnePost = useCallback(async(id: string) => {
+  const fetchOnePostFromApi = useCallback(async(id: string) => {
     const response: {data: IPostApi} = await axiosApi<IPostApi>(`posts/${id}.json`);
     if (response.data) {
       setPost(response.data);
@@ -19,9 +19,9 @@ const EditPost = () => {
 
   useEffect(() => {
     if (params.idPost) {
-      void fetchOnePost(params.idPost);
+      void fetchOnePostFromApi(params.idPost);
     }
-  }, [params.idPost, fetchOnePost]);
+  }, [params.idPost, fetchOnePostFromApi]);
 
   const submitForm = async (post: IPostForm) => {
     try {
@@ -37,7 +37,7 @@ const EditPost = () => {
 
   return post && (
     <div>
-      <PostForm submitForm={submitForm} postToEdit={post}/>
+      <PostForm postToEdit={post} submitForm={submitForm} />
     </div>
   );
 };

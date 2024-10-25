@@ -1,14 +1,14 @@
 export interface IPostForm {
+  date: string;
   title: string;
   description: string;
-  date: string;
 }
 
 export interface IPost {
   id: string;
+  date: string;
   title: string;
   description: string;
-  date: string;
 }
 
 export interface IPostApi {

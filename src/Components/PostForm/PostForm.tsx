@@ -23,8 +23,8 @@ const PostForm: React.FC<Props> = ({submitForm, postToEdit}) => {
   useEffect(() => {
     if (postToEdit) {
       setPost(prevState => ({
-        ...prevState,
-        ...postToEdit,
+          ...prevState,
+          ...postToEdit,
       }));
     }
   }, [postToEdit]);

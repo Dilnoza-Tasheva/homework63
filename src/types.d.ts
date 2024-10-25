@@ -13,8 +13,4 @@ export interface IPost {
 
 export interface IPostApi {
   [id: string]: IPost;
-  id: string;
-  title: string;
-  description: string;
-  date: string;
 }

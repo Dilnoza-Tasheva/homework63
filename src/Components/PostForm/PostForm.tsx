@@ -41,13 +41,16 @@ const PostForm: React.FC<Props> = ({submitForm, postToEdit}) => {
     e.preventDefault();
 
     submitForm({...post, date: dayjs().format('YYYY-MM-DD')});
-    setPost({...initialForm});
+
+    if (!postToEdit) {
+      setPost({...initialForm});
+    }
   };
 
   return (
     <form onSubmit={onSubmitForm}>
       <Typography variant="h6" sx={{ flexGrow: 1, textAlign: "center" }}>
-        Add new post
+        {postToEdit ? 'Edit Post' : 'Add New Post'}
       </Typography>
 
       <Grid container spacing={2} sx={{mx: "auto", width: "50%", mt: 4}}>
@@ -75,7 +78,7 @@ const PostForm: React.FC<Props> = ({submitForm, postToEdit}) => {
         </Grid>
         <Grid size={12}>
           <Button type="submit" variant="contained" sx={{width: "100%"}}>
-            Save
+            {postToEdit ? 'Update Post' : 'Save'}
           </Button>
         </Grid>
       </Grid>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IPost, IPostApi } from '../../types';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import axiosApi from '../../axiosApi.ts';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 
@@ -8,6 +8,7 @@ import { Button, Card, CardContent, Typography } from '@mui/material';
 const ReadMore = () => {
   const [post, setPost] = useState<IPost>({});
   const params = useParams<{idPost: string}>();
+  const navigate = useNavigate();
 
   const fetchOnePost = useCallback(async(id: string) => {
     const response: {data: IPostApi} = await axiosApi<IPostApi>(`posts/${id}.json`);
@@ -15,6 +16,15 @@ const ReadMore = () => {
       setPost(response.data);
     }
   }, []);
+
+  const deletePost = async () => {
+    try {
+      await axiosApi.delete(`posts/${params.idPost}.json`);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (params.idPost) {
@@ -30,7 +40,7 @@ const ReadMore = () => {
         </Typography>
         <Typography variant="h5" gutterBottom>{post.title}</Typography>
         <Typography variant="body1">{post.description}</Typography>
-        <Button size="small" component={NavLink} to={"/"}>Delete</Button>
+        <Button size="small" onClick={deletePost}>Delete</Button>
         <Button size="small" component={NavLink} to={`/posts/${post.id}/edit`}>Edit</Button>
       </CardContent>
     </Card>

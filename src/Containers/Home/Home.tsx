@@ -30,11 +30,14 @@ const Home = () => {
   return (
     <>
       {posts.length === 0 ? <p>No posts</p> :
-        <Grid container spacing={2}>
+        <Grid>
           {posts.map((post) => (
-            <Grid key={post.id}>
+            <Grid key={post.id} sx={{mb: 4}}>
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 12 }}>
+                    {post.date}
+                  </Typography>
                   <Typography gutterBottom sx={{ fontSize: 19 }}>
                     {post.title}
                   </Typography>

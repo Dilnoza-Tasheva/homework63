@@ -46,7 +46,7 @@ const Home = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" component={NavLink} to={'/'}>Read more</Button>
+                  <Button size="small" component={NavLink} to={`/posts/${post.id}`}>Read more</Button>
                 </CardActions>
               </Card>
             </Grid>

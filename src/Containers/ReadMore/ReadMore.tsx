@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IPost, IPostApi } from '../../types';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import axiosApi from '../../axiosApi.ts';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Button, Card, CardContent, Typography } from '@mui/material';
 
 
 const ReadMore = () => {
@@ -25,11 +25,13 @@ const ReadMore = () => {
   return (
     <Card sx={{ minWidth: 275, width: '100%', mt: 4 }}>
       <CardContent>
-        <Typography variant="h5" gutterBottom>{post.title}</Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          Дата создания: {post.date}
+          Date created: {post.date}
         </Typography>
+        <Typography variant="h5" gutterBottom>{post.title}</Typography>
         <Typography variant="body1">{post.description}</Typography>
+        <Button size="small" component={NavLink} to={"/"}>Delete</Button>
+        <Button size="small" component={NavLink} to={"/"}>Edit</Button>
       </CardContent>
     </Card>
   );

@@ -19,7 +19,7 @@ const App = () => (
         <Route path="/posts/add-post" element={<AddPost/>}></Route>
         <Route path="/posts/about" element={<About/>}></Route>
         <Route path="/posts/contacts" element={<Contacts/>}></Route>
-        <Route path="/posts/:postId" element={<ReadMore/>}></Route>
+        <Route path="/posts/:idPost" element={<ReadMore/>}></Route>
         <Route path="*" element={<Typography variant="h6">Not found</Typography>}></Route>
       </Routes>
     </Container>
